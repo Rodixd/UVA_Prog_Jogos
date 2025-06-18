@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 7de1c8244b6e31047b02d55eb3e5f1cb
+guid: 0b51d8aab0c154e4a9ac5c28d6cd1934
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 632012321606051016
-    second: HUD_Boss_0
+      213: -6869325624984279803
+    second: HUD_0
+  - first:
+      213: -2205522050570982886
+    second: HUD_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +116,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HUD_Boss_0
+      name: HUD_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 2
-        width: 80
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+        y: 0
+        width: 46
+        height: 18
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 29, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8c4aff2abdb55c800800000000000000
-      internalID: 632012321606051016
+      spriteID: 505e2544db04ba0a0800000000000000
+      internalID: -6869325624984279803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUD_1
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 0
+        width: 76
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 57, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1aec6f51696461e0800000000000000
+      internalID: -2205522050570982886
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f6f850ad8160b44e2b7243bae5846212
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HUD_Boss_0: 632012321606051016
+      HUD_0: -6869325624984279803
+      HUD_1: -2205522050570982886
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

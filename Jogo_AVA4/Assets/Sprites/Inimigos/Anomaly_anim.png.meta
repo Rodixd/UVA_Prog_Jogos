@@ -797,7 +797,34 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Anomaly_anim_0: -4695403823270803760
+      Anomaly_anim_1: -1707042515004803634
+      Anomaly_anim_10: -2728801291891897796
+      Anomaly_anim_11: 5527511753504926751
+      Anomaly_anim_12: -6440568980504955406
+      Anomaly_anim_13: -1147964862420628113
+      Anomaly_anim_14: -8482566629873336023
+      Anomaly_anim_15: -8083684438355589882
+      Anomaly_anim_16: 8323789329483531846
+      Anomaly_anim_17: -4457240639383813993
+      Anomaly_anim_18: -7717985406866289736
+      Anomaly_anim_19: -9060551104076602938
+      Anomaly_anim_2: 5035714771243797317
+      Anomaly_anim_20: -9033721337649344499
+      Anomaly_anim_21: -4036258201474349547
+      Anomaly_anim_22: -8087003406169432156
+      Anomaly_anim_23: -5282263399111013795
+      Anomaly_anim_24: -5653635599472611913
+      Anomaly_anim_25: -1407363763323826166
+      Anomaly_anim_26: 7965685789025577876
+      Anomaly_anim_3: -2298718536414132298
+      Anomaly_anim_4: 6925879662176230370
+      Anomaly_anim_5: 6978245031969240005
+      Anomaly_anim_6: -86113799516258928
+      Anomaly_anim_7: -4742222234848461970
+      Anomaly_anim_8: 1999872193486658239
+      Anomaly_anim_9: 6569342087784006753
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

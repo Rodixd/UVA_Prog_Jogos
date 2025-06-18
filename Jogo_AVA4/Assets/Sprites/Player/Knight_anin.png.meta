@@ -148,7 +148,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -162,7 +162,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -1072,7 +1072,45 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Knight_anin_0: 2740851794345277922
+      Knight_anin_1: -5890541035452930518
+      Knight_anin_10: -2827654438273958442
+      Knight_anin_11: -8121828746016567479
+      Knight_anin_12: 7870093430079653728
+      Knight_anin_13: -3704241057218661491
+      Knight_anin_14: 4972312885877297051
+      Knight_anin_15: 8100958418207130403
+      Knight_anin_16: 4036087454164203961
+      Knight_anin_17: 1108591460579986660
+      Knight_anin_18: 4274711033100351990
+      Knight_anin_19: -87265477326585561
+      Knight_anin_2: -5455836158881449870
+      Knight_anin_20: -8087022124927776858
+      Knight_anin_21: 4054829109583081791
+      Knight_anin_22: 1130654808338738449
+      Knight_anin_23: -5370654418671695841
+      Knight_anin_24: -7076150949927575644
+      Knight_anin_25: 8636349298940086265
+      Knight_anin_26: -3095322127828211099
+      Knight_anin_27: 3781452972944827435
+      Knight_anin_28: 7400554228916875151
+      Knight_anin_29: -3374291719807041968
+      Knight_anin_3: 5304075862381245165
+      Knight_anin_30: 6912781966107282824
+      Knight_anin_31: 1938078588108316488
+      Knight_anin_32: 4965647330350339958
+      Knight_anin_33: -5063015674892679145
+      Knight_anin_34: 6385775064224134243
+      Knight_anin_35: 4502582739647590385
+      Knight_anin_36: -530700042088340319
+      Knight_anin_37: -5731375854447515238
+      Knight_anin_4: -1289352110061356996
+      Knight_anin_5: -154934953443118400
+      Knight_anin_6: -1134424740243353577
+      Knight_anin_7: -8751797582656978445
+      Knight_anin_8: -614750209294644607
+      Knight_anin_9: -7956714718351479127
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

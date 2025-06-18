@@ -797,7 +797,34 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Thief_anim_0: 6755236944495837895
+      Thief_anim_1: 1300373889767536862
+      Thief_anim_10: -548769422471903166
+      Thief_anim_11: -1224219979827581126
+      Thief_anim_12: 6638524944065617900
+      Thief_anim_13: 7663927831840159772
+      Thief_anim_14: -2512126230680521185
+      Thief_anim_15: -8176768326345040015
+      Thief_anim_16: 6807821570686303990
+      Thief_anim_17: -2924515395821035128
+      Thief_anim_18: -6234716004982188185
+      Thief_anim_19: -7969374441024623719
+      Thief_anim_2: 387545401630592209
+      Thief_anim_20: -4193334918381656423
+      Thief_anim_21: 7748651078085666642
+      Thief_anim_22: 1692922124214254498
+      Thief_anim_23: 7326021230881228269
+      Thief_anim_24: 7112255661473173556
+      Thief_anim_25: -6609437680785238901
+      Thief_anim_26: 8042756605803503811
+      Thief_anim_3: -5241432062873185174
+      Thief_anim_4: 8479310409311905083
+      Thief_anim_5: 8675652758758572945
+      Thief_anim_6: -4464978398210875841
+      Thief_anim_7: -7682311151808405615
+      Thief_anim_8: 4418460372479997312
+      Thief_anim_9: 3766401915370479263
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
