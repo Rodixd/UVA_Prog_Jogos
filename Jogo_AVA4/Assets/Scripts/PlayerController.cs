@@ -5,10 +5,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
-    private enum State { idle, run, jump, falling };
+    private enum State { idle, run, jump, falling, attack };
     private State state = State.idle;
     private Collider2D coll;
     [SerializeField] private LayerMask Ground;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float jumpForce = 10f;
+    public int key = 0; // Key for unlocking doors or other interactions
     private Vector3 originalScale;
 
     void Start()
@@ -26,12 +29,12 @@ public class PlayerController : MonoBehaviour
         // Horizontal Movement and Flipping
         if (hDirection > 0)
         {
-            rb.linearVelocity = new Vector2(5f, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
             transform.localScale = new Vector3(Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
         }
         else if (hDirection < 0)
         {
-            rb.linearVelocity = new Vector2(-5f, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(-speed, rb.linearVelocity.y);
             transform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
         }
         else
@@ -42,16 +45,38 @@ public class PlayerController : MonoBehaviour
         // Jump
         if (Input.GetButtonDown("Jump") && coll.IsTouchingLayers(Ground))
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 10f);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             state = State.jump;
         }
+
+        // Attack input
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            state = State.attack;
+            anim.SetTrigger("Attack");
+        }
+
 
         VelocityState();
         anim.SetInteger("State", (int)state);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Collectable")
+        {
+            Destroy(collision.gameObject);
+            key += 1; // Increment key count when collecting an item
+        }
+    }
     private void VelocityState()
     {
+        // Prevent state updates while the Attack animation is actively playing
+        if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            return;
+        }
+
         if (state == State.jump)
         {
             if (rb.linearVelocity.y < .1f)
