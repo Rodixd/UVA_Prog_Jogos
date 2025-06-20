@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 10f;
     public int key = 0; // Key for unlocking doors or other interactions
     private Vector3 originalScale;
+
+    [field: SerializeField]
+    private UnityEvent onRespawnRequired { get; set; }
 
     void Start()
     {
@@ -59,6 +63,11 @@ public class PlayerController : MonoBehaviour
 
         VelocityState();
         anim.SetInteger("State", (int)state);
+    }
+
+    public void PlayerDied()
+    {
+        onRespawnRequired?.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
