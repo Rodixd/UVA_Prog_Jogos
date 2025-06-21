@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    #region Public Variables
     public float attackDistance;
     public float moveSpeed;
     public float timer;
@@ -14,22 +13,36 @@ public class EnemyBehaviour : MonoBehaviour
     public GameObject hotZone;
     public GameObject triggerArea;
     public int damage = 1;
-    #endregion
 
-    #region Private Variables
     private Animator anim;
     private float distance;
     private bool attackMode;
     private bool cooling;
     private float intTimer;
-    #endregion
+
+    private Transform visualChild;
+    private Vector3 originalScale;
 
     private void Awake()
     {
         SelectTarget();
         intTimer = timer;
         anim = GetComponent<Animator>();
+
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        if (sr != null)
+        {
+            visualChild = sr.transform;
+            originalScale = visualChild.localScale;
+        }
+        else
+        {
+            Debug.LogWarning("EnemyBehaviour: No SpriteRenderer found in children!");
+            visualChild = transform;  // fallback
+            originalScale = visualChild.localScale;
+        }
     }
+
     void Update()
     {
         if (!attackMode)
@@ -47,6 +60,7 @@ public class EnemyBehaviour : MonoBehaviour
             EnemyLogic();
         }
     }
+
     void EnemyLogic()
     {
         distance = Vector2.Distance(transform.position, target.position);
@@ -75,6 +89,8 @@ public class EnemyBehaviour : MonoBehaviour
         {
             Vector2 targetPosition = new Vector2(target.position.x, transform.position.y);
 
+            Flip();
+
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
     }
@@ -83,7 +99,6 @@ public class EnemyBehaviour : MonoBehaviour
     {
         timer = intTimer;
         attackMode = true;
-
         anim.SetBool("canWalk", false);
         anim.SetBool("Attack", true);
     }
@@ -97,17 +112,19 @@ public class EnemyBehaviour : MonoBehaviour
             timer = intTimer;
         }
     }
+
     void StopAttack()
     {
         cooling = false;
         attackMode = false;
         anim.SetBool("Attack", false);
     }
+
     public void TriggerCooling()
     {
         cooling = true;
-
     }
+
     private bool InsideofLimits()
     {
         return transform.position.x > leftLimit.position.x && transform.position.x < rightLimit.position.x;
@@ -128,21 +145,30 @@ public class EnemyBehaviour : MonoBehaviour
         }
 
         Flip();
-
     }
 
     public void Flip()
     {
-        Vector3 rotation = transform.rotation.eulerAngles;
-        if(transform.position.x < target.position.x)
+        if (visualChild == null) return;
+
+        Vector3 scale = originalScale;
+
+        if (inRange && target != null)
         {
-            rotation.y = 0f;
+            if (transform.position.x < target.position.x)
+                scale.x = -Mathf.Abs(originalScale.x);  // face left if target is right
+            else
+                scale.x = Mathf.Abs(originalScale.x);   // face right if target is left
         }
-        else
+        else if (target != null)
         {
-            rotation.y = 180f;
+            if (transform.position.x < target.position.x)
+                scale.x = -Mathf.Abs(originalScale.x);
+            else
+                scale.x = Mathf.Abs(originalScale.x);
         }
 
-        transform.eulerAngles = rotation;
+        visualChild.localScale = scale;
     }
+
 }

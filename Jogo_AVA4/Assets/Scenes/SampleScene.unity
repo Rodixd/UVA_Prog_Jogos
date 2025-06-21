@@ -2131,7 +2131,7 @@ GameObject:
   - component: {fileID: 1054705742}
   - component: {fileID: 1054705741}
   - component: {fileID: 1054705744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inimigo_Cavaleiro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2168,7 +2168,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054705740}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -8948,6 +8948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 4
+  invulnerabilityDuration: 1
   healthUI: {fileID: 832212616}
 --- !u!4 &1803779345 stripped
 Transform:
@@ -9795,6 +9796,14 @@ PrefabInstance:
     - target: {fileID: 4973438314405182858, guid: 10aa143a92e1e41c899f744ff1faef47, type: 3}
       propertyPath: <onRespawnRequired>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5034031549168742503, guid: 10aa143a92e1e41c899f744ff1faef47, type: 3}
+      propertyPath: m_Size.y
+      value: 1.0471056
+      objectReference: {fileID: 0}
+    - target: {fileID: 5034031549168742503, guid: 10aa143a92e1e41c899f744ff1faef47, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.030290842
       objectReference: {fileID: 0}
     - target: {fileID: 5034031549168742503, guid: 10aa143a92e1e41c899f744ff1faef47, type: 3}
       propertyPath: m_IsTrigger

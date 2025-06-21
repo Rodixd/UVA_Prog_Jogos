@@ -14,11 +14,12 @@ public class HotZoneCheck : MonoBehaviour
 
     private void Update()
     {
-        if(inRange && !anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_attack"))
+        if (inRange && !anim.GetCurrentAnimatorStateInfo(0).IsName("Enemy_attack"))
         {
             enemyParent.Flip();
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.CompareTag("Player"))
@@ -39,3 +40,4 @@ public class HotZoneCheck : MonoBehaviour
         }
     }
 }
+
