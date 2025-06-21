@@ -12,15 +12,16 @@ public class DestroyFallingObjects : MonoBehaviour
     private void FixedUpdate()
     {
         Collider2D collider = Physics2D.OverlapBox(transform.position, size, 0, objectsToDestoryLayerMask);
-        if(collider != null)
+        if (collider != null)
         {
-            PlayerController player = collider.GetComponent<PlayerController>();
-            if(player == null)
+            PlayerHealth playerHealth = collider.GetComponent<PlayerHealth>();
+            if (playerHealth == null)
             {
                 Destroy(collider.gameObject);
                 return;
             }
-            player.PlayerDied();
+
+            playerHealth.HandleFallDeath();
         }
     }
 

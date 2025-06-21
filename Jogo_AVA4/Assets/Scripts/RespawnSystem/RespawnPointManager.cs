@@ -45,5 +45,12 @@ namespace RespawnSystem
             }
             currentRespawnPoint = respawnPoints[0];
         }
+        public void ForceRespawnAt(RespawnPoint spawnPoint, GameObject playerGO)
+        {
+            spawnPoint.SetPlayerGO(playerGO);
+            spawnPoint.RespawnPlayer();
+            playerGO.SetActive(true);
+        }
+
     }
 }

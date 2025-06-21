@@ -1,6 +1,6 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -12,10 +12,15 @@ public class PlayerHealth : MonoBehaviour
     public HealthUI healthUI;
     private Animator anim;
 
+    public UnityEvent onPlayerDeath;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        if (onPlayerDeath == null)
+            onPlayerDeath = new UnityEvent();
     }
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -37,21 +42,57 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         if (!isInvulnerable)
         {
             currentHealth -= damage;
-            healthUI.SetHealth(currentHealth);
-        }
-        
-        // Hit animation
-        anim.SetBool("isHit", true);
+            currentHealth = Mathf.Max(0, currentHealth);
 
+            healthUI.SetHealth(currentHealth);
+            anim.SetBool("isHit", true);
+
+            if (currentHealth <= 0)
+            {
+                StartCoroutine(DieAndRespawnRoutine(true));  // Full level reset
+            }
+        }
+    }
+
+    public void HandleFallDeath()
+    {
+        // Lose 1 heart on fall
+        currentHealth = Mathf.Max(0, currentHealth - 1);
+        healthUI.SetHealth(currentHealth);
 
         if (currentHealth <= 0)
         {
-            //Player morreu, game over
+            StartCoroutine(DieAndRespawnRoutine(true));  // Full reset at first spawn
+        }
+        else
+        {
+            GetComponent<PlayerController>().RespawnAfterDeath();  // Normal respawn at last checkpoint
+        }
+    }
+
+    private IEnumerator DieAndRespawnRoutine(bool resetToFirstSpawn)
+    {
+        anim.SetTrigger("Die");
+
+        onPlayerDeath?.Invoke();
+
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+
+        currentHealth = maxHealth;
+        healthUI.SetHealth(currentHealth);
+
+        if (resetToFirstSpawn)
+        {
+            GetComponent<PlayerController>().RespawnAtFirstSpawn();
+        }
+        else
+        {
+            GetComponent<PlayerController>().RespawnAfterDeath();
         }
     }
 
@@ -65,6 +106,5 @@ public class PlayerHealth : MonoBehaviour
         isInvulnerable = true;
         yield return new WaitForSeconds(invulnerabilityDuration);
         isInvulnerable = false;
-
     }
 }
