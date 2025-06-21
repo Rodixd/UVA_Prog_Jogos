@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,11 +29,10 @@ namespace RespawnSystem
             objectToRespawn.SetActive(true);
         }
 
-        public void RespawnAt(RespawnPoint spawnPoint, GameObject playeGO)
+        public void RespawnAt(RespawnPoint spawnPoint, GameObject playerGO)
         {
-
-            spawnPoint.SetPlayerGO(playeGO);
-            Respawn(playeGO);
+            spawnPoint.SetPlayerGO(playerGO);
+            Respawn(playerGO);
         }
 
         public void ResetAllSpawnPoints()
@@ -45,6 +43,7 @@ namespace RespawnSystem
             }
             currentRespawnPoint = respawnPoints[0];
         }
+
         public void ForceRespawnAt(RespawnPoint spawnPoint, GameObject playerGO)
         {
             spawnPoint.SetPlayerGO(playerGO);
@@ -52,5 +51,12 @@ namespace RespawnSystem
             playerGO.SetActive(true);
         }
 
+        // Reset currentRespawnPoint to first spawn (used on full death respawn)
+        public void ResetToFirstRespawnPoint()
+        {
+            currentRespawnPoint.DisableRespawnPoint();
+            currentRespawnPoint = respawnPoints[0];
+            currentRespawnPoint.ResetRespawnPoint();
+        }
     }
 }

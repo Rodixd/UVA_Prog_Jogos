@@ -34,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(enemy.damage);
         }
+
         Trap trap = collision.GetComponent<Trap>();
         if (trap && trap.damage > 0 && !isInvulnerable)
         {
@@ -47,8 +48,6 @@ public class PlayerHealth : MonoBehaviour
         if (!isInvulnerable)
         {
             currentHealth -= damage;
-            currentHealth = Mathf.Max(0, currentHealth);
-
             healthUI.SetHealth(currentHealth);
             anim.SetBool("isHit", true);
 
@@ -61,17 +60,16 @@ public class PlayerHealth : MonoBehaviour
 
     public void HandleFallDeath()
     {
-        // Lose 1 heart on fall
-        currentHealth = Mathf.Max(0, currentHealth - 1);
+        currentHealth -= 1;
         healthUI.SetHealth(currentHealth);
 
         if (currentHealth <= 0)
         {
-            StartCoroutine(DieAndRespawnRoutine(true));  // Full reset at first spawn
+            StartCoroutine(DieAndRespawnRoutine(true));  // Full reset
         }
         else
         {
-            GetComponent<PlayerController>().RespawnAfterDeath();  // Normal respawn at last checkpoint
+            GetComponent<PlayerController>().RespawnAfterDeath();
         }
     }
 

@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask Ground;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 10f;
-    public int key = 0;
+    public int key = 0; // Key for unlocking doors or other interactions
     private Vector3 originalScale;
 
     [field: SerializeField]
@@ -52,33 +52,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void RespawnAfterDeath()
-    {
-        if (respawnHelper != null)
-        {
-            respawnHelper.RespawnPlayer();
-        }
-
-        state = State.idle;
-        anim.Play("Player_Idle");
-        anim.SetInteger("State", (int)state);
-    }
-
-    public void RespawnAtFirstSpawn()
-    {
-        RespawnPointManager manager = FindFirstObjectByType<RespawnPointManager>();
-        RespawnPoint firstSpawn = manager.transform.GetChild(0).GetComponent<RespawnPoint>();
-        manager.ForceRespawnAt(firstSpawn, gameObject);
-
-        state = State.idle;
-        anim.Play("Player_Idle");
-        anim.SetInteger("State", (int)state);
-    }
-
     void Update()
     {
         float hDirection = Input.GetAxis("Horizontal");
 
+        // Horizontal Movement and Flipping
         if (hDirection > 0)
         {
             rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
@@ -94,12 +72,14 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
         }
 
+        // Jump
         if (Input.GetButtonDown("Jump") && coll.IsTouchingLayers(Ground))
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             state = State.jump;
         }
 
+        // Attack input
         if (Input.GetKeyDown(KeyCode.Space))
         {
             state = State.attack;
@@ -110,22 +90,9 @@ public class PlayerController : MonoBehaviour
         anim.SetInteger("State", (int)state);
     }
 
-    public void PlayerDied()
-    {
-        onRespawnRequired?.Invoke();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Collectable")
-        {
-            Destroy(collision.gameObject);
-            key += 1;
-        }
-    }
-
     private void VelocityState()
     {
+        // Prevent state updates while the Attack animation is actively playing
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             return;
@@ -152,6 +119,56 @@ public class PlayerController : MonoBehaviour
         else
         {
             state = State.idle;
+        }
+    }
+
+    public void PlayerDied()
+    {
+        onRespawnRequired?.Invoke();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Collectable")
+        {
+            Destroy(collision.gameObject);
+            key += 1; // Increment key count when collecting an item
+        }
+    }
+
+    public void RespawnAfterDeath()
+    {
+        if (respawnHelper != null)
+        {
+            respawnHelper.RespawnPlayer();
+        }
+
+        state = State.idle;
+        anim.Play("Player_Idle");  // Replace with your actual idle animation name
+        anim.SetInteger("State", (int)state);
+    }
+
+    public void RespawnAtFirstSpawn()
+    {
+        RespawnPointManager manager = FindFirstObjectByType<RespawnPointManager>();
+
+        // Reset current respawn point to first spawn point on full death
+        manager.ResetToFirstRespawnPoint();
+
+        RespawnPoint firstSpawn = manager.transform.GetChild(0).GetComponent<RespawnPoint>();
+        manager.ForceRespawnAt(firstSpawn, gameObject);
+
+        state = State.idle;
+        anim.Play("Player_Idle");
+        anim.SetInteger("State", (int)state);
+    }
+
+    // Optional: Method to damage player when falling
+    public void FallDeath()
+    {
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(1);
         }
     }
 }
