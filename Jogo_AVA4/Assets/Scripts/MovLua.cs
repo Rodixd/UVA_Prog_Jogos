@@ -4,6 +4,8 @@ public class MovLua : MonoBehaviour
 {
     private Rigidbody2D corpo;
     public float velocidade = 1.0f;
+    public float posicao_inicial = -121.0f;
+    public float posicao_final = 108.0f;
 
     void Start()
     {
@@ -14,9 +16,9 @@ public class MovLua : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.x >= 108)
+        if(transform.position.x >= posicao_final)
         {
-            transform.Translate(-121, 0, 0);
+            transform.Translate(posicao_inicial, 0, 0);
         }
     }
 }
