@@ -17,9 +17,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 10f;
     public int key = 0; // Key for unlocking doors or other interactions
     private Vector3 originalScale;
+    public int damage = 1;
 
     [field: SerializeField]
     private UnityEvent onRespawnRequired { get; set; }
+
+    [Header("UI")]
+    public GameObject keyIconUI;
 
     void Start()
     {
@@ -49,6 +53,11 @@ public class PlayerController : MonoBehaviour
             {
                 RespawnAfterDeath();
             });
+        }
+
+        if(keyIconUI != null)
+        {
+            keyIconUI.SetActive(false);
         }
     }
 
@@ -133,6 +142,11 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             key += 1; // Increment key count when collecting an item
+
+            if (keyIconUI != null)
+            {
+                keyIconUI.SetActive(true);
+            }
         }
     }
 

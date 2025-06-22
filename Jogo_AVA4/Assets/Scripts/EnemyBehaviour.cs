@@ -22,7 +22,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     private Transform visualChild;
     private Vector3 originalScale;
-
+    private Vector3 originalTriggerLocalPos;
+   
     private void Awake()
     {
         SelectTarget();
@@ -40,6 +41,14 @@ public class EnemyBehaviour : MonoBehaviour
             Debug.LogWarning("EnemyBehaviour: No SpriteRenderer found in children!");
             visualChild = transform;  // fallback
             originalScale = visualChild.localScale;
+        }
+        if(triggerArea != null)
+        {
+            originalTriggerLocalPos = triggerArea.transform.localPosition;
+        }
+        else
+        {
+            Debug.LogWarning("EnemyBehaviour: No triggerArea assigned!");
         }
     }
 
@@ -169,6 +178,21 @@ public class EnemyBehaviour : MonoBehaviour
         }
 
         visualChild.localScale = scale;
+
+        if(triggerArea != null)
+        {
+            Vector3 triggerPos = triggerArea.transform.localPosition;
+
+            if(scale.x > 0)
+            {
+                triggerPos.x = Mathf.Abs(originalTriggerLocalPos.x);
+            }
+            else
+            {
+                triggerPos.x = -Mathf.Abs(originalTriggerLocalPos.x);
+            }
+            triggerArea.transform.localPosition = triggerPos;
+        }
     }
 
 }

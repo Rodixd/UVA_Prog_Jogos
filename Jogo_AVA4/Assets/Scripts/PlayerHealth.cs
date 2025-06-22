@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 4;
     private int currentHealth;
-    private bool isInvulnerable = false;
+    public bool isInvulnerable = false;
     public float invulnerabilityDuration = 1f;
 
     public HealthUI healthUI;
@@ -29,10 +29,10 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        EnemyBehaviour enemy = collision.GetComponent<EnemyBehaviour>();
-        if (enemy)
+        EnemyBehaviour Inimigo_Cavaleiro = collision.GetComponent<EnemyBehaviour>();
+        if (Inimigo_Cavaleiro)
         {
-            TakeDamage(enemy.damage);
+            TakeDamage(Inimigo_Cavaleiro.damage);
         }
 
         Trap trap = collision.GetComponent<Trap>();
