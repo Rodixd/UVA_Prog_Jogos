@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask Ground;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 10f;
-    public int key = 0; // Key for unlocking doors or other interactions
+    public int key = 0;
     private Vector3 originalScale;
     public int damage = 1;
 
@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
     [Header("UI")]
     public GameObject keyIconUI;
 
+    [Header("Attack Hitbox")]
+    public GameObject attackHitboxObject;  // Assign your AttackHitbox GameObject here in inspector
+    private Vector3 attackHitboxOriginalPos;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,6 +37,12 @@ public class PlayerController : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         respawnHelper = GetComponent<RespawnHelper>();
         originalScale = transform.localScale;
+
+        if (attackHitboxObject != null)
+        {
+            attackHitboxOriginalPos = attackHitboxObject.transform.localPosition;
+            attackHitboxObject.SetActive(false);
+        }
 
         onRespawnRequired.AddListener(() =>
         {
@@ -55,7 +65,7 @@ public class PlayerController : MonoBehaviour
             });
         }
 
-        if(keyIconUI != null)
+        if (keyIconUI != null)
         {
             keyIconUI.SetActive(false);
         }
@@ -70,11 +80,13 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
             transform.localScale = new Vector3(Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
+            FlipAttackHitbox(true);
         }
         else if (hDirection < 0)
         {
             rb.linearVelocity = new Vector2(-speed, rb.linearVelocity.y);
             transform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
+            FlipAttackHitbox(false);
         }
         else
         {
@@ -99,9 +111,17 @@ public class PlayerController : MonoBehaviour
         anim.SetInteger("State", (int)state);
     }
 
+    private void FlipAttackHitbox(bool facingRight)
+    {
+        if (attackHitboxObject == null) return;
+
+        Vector3 pos = attackHitboxOriginalPos;
+        pos.x = facingRight ? Mathf.Abs(attackHitboxOriginalPos.x) : -Mathf.Abs(attackHitboxOriginalPos.x);
+        attackHitboxObject.transform.localPosition = pos;
+    }
+
     private void VelocityState()
     {
-        // Prevent state updates while the Attack animation is actively playing
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             return;
@@ -138,10 +158,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Collectable")
+        if (collision.CompareTag("Collectable"))
         {
             Destroy(collision.gameObject);
-            key += 1; // Increment key count when collecting an item
+            key += 1;
 
             if (keyIconUI != null)
             {
@@ -158,7 +178,7 @@ public class PlayerController : MonoBehaviour
         }
 
         state = State.idle;
-        anim.Play("Player_Idle");  // Replace with your actual idle animation name
+        anim.Play("Player_Idle");
         anim.SetInteger("State", (int)state);
     }
 
@@ -166,7 +186,6 @@ public class PlayerController : MonoBehaviour
     {
         RespawnPointManager manager = FindFirstObjectByType<RespawnPointManager>();
 
-        // Reset current respawn point to first spawn point on full death
         manager.ResetToFirstRespawnPoint();
 
         RespawnPoint firstSpawn = manager.transform.GetChild(0).GetComponent<RespawnPoint>();
@@ -177,12 +196,29 @@ public class PlayerController : MonoBehaviour
         anim.SetInteger("State", (int)state);
     }
 
-    // Optional: Method to damage player when falling
     public void FallDeath()
     {
         if (playerHealth != null)
         {
             playerHealth.TakeDamage(1);
+        }
+    }
+
+    // Call from Animation Event
+    public void EnableAttackHitbox()
+    {
+        if (attackHitboxObject != null)
+        {
+            attackHitboxObject.SetActive(true);
+        }
+    }
+
+    // Call from Animation Event
+    public void DisableAttackHitbox()
+    {
+        if (attackHitboxObject != null)
+        {
+            attackHitboxObject.SetActive(false);
         }
     }
 }

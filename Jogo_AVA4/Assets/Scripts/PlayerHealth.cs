@@ -29,12 +29,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        EnemyBehaviour Inimigo_Cavaleiro = collision.GetComponent<EnemyBehaviour>();
-        if (Inimigo_Cavaleiro)
-        {
-            TakeDamage(Inimigo_Cavaleiro.damage);
-        }
-
         Trap trap = collision.GetComponent<Trap>();
         if (trap && trap.damage > 0 && !isInvulnerable)
         {
@@ -105,4 +99,10 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(invulnerabilityDuration);
         isInvulnerable = false;
     }
+
+    public bool IsInvulnerable()
+    {
+        return isInvulnerable;
+    }
+
 }

@@ -2,18 +2,24 @@ using UnityEngine;
 
 public class HitBoxCheck : MonoBehaviour
 {
+    public int damage = 1;
+    private bool hasDealtDamage = false;
+
+    private void OnEnable()
+    {
+        // Reset at the start of each attack
+        hasDealtDamage = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (hasDealtDamage) return;
+
         PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
-        if (playerHealth)
+        if (playerHealth != null && !playerHealth.IsInvulnerable())
         {
-            // Check if the player is invulnerable
-            if (!playerHealth.isInvulnerable)
-            {
-                // If not invulnerable, apply damage
-                playerHealth.TakeDamage(1); // Assuming 1 damage for hitbox check
-            }
+            playerHealth.TakeDamage(damage);
+            hasDealtDamage = true;
         }
-        // You can add more checks for other components if needed
     }
 }

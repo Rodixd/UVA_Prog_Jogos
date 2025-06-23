@@ -12,6 +12,7 @@ public class EnemyBehaviour : MonoBehaviour
     [HideInInspector] public bool inRange;
     public GameObject hotZone;
     public GameObject triggerArea;
+    public GameObject attackHitbox;
     public int damage = 1;
 
     private Animator anim;
@@ -69,6 +70,18 @@ public class EnemyBehaviour : MonoBehaviour
             EnemyLogic();
         }
     }
+
+    public void EnableAttackHitbox()
+    {
+        if (attackHitbox != null)
+            attackHitbox.SetActive(true);
+    }
+    public void DisableAttackHitbox()
+    {
+        if (attackHitbox != null)
+            attackHitbox.SetActive(false);
+    }
+
 
     void EnemyLogic()
     {
