@@ -207,5 +207,4 @@ public class EnemyBehaviour : MonoBehaviour
             triggerArea.transform.localPosition = triggerPos;
         }
     }
-
 }

@@ -224,6 +224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: 0.5
+  posicao_inicial: 137
+  posicao_final: -20
 --- !u!50 &6177291245555948803
 Rigidbody2D:
   serializedVersion: 5

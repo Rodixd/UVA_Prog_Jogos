@@ -55,11 +55,17 @@ TagManager:
   - name: Middleground
     uniqueID: 2606155633
     locked: 0
+  - name: Porta
+    uniqueID: 1044210073
+    locked: 0
   - name: Ground
     uniqueID: 3543607855
     locked: 0
   - name: Character
     uniqueID: 3539461479
+    locked: 0
+  - name: Traps
+    uniqueID: 1981432871
     locked: 0
   - name: Foreground
     uniqueID: 1317344807

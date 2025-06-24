@@ -29,6 +29,6 @@ public class EnemyHealth : MonoBehaviour
     {
         anim.SetTrigger("isDead");
         enemy.moveSpeed = 0f;
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 1f);
     }
 }
