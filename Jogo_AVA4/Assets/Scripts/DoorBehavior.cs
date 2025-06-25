@@ -46,6 +46,7 @@ public class Door : MonoBehaviour
 
     private void OpenDoorAndLoadScene()
     {
+        SoundEffectManager.Play("Door");
         isOpened = true;
 
         // 1. Change the sprite to the open door

@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
         // Jump
         if (Input.GetButtonDown("Jump") && coll.IsTouchingLayers(Ground))
         {
+            SoundEffectManager.Play("Jump");
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             state = State.jump;
         }
@@ -103,6 +104,7 @@ public class PlayerController : MonoBehaviour
         // Attack input
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            SoundEffectManager.Play("Attack");
             state = State.attack;
             anim.SetTrigger("Attack");
         }
@@ -160,6 +162,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Collectable"))
         {
+            SoundEffectManager.Play("Key");
             Destroy(collision.gameObject);
             key += 1;
 

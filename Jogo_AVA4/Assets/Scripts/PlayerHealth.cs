@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (!isInvulnerable)
         {
+            SoundEffectManager.Play("Hurt");
             currentHealth -= damage;
             healthUI.SetHealth(currentHealth);
             anim.SetBool("isHit", true);
@@ -69,6 +70,7 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator DieAndRespawnRoutine(bool resetToFirstSpawn)
     {
+        SoundEffectManager.Play("Die");
         anim.SetTrigger("Die");
 
         onPlayerDeath?.Invoke();

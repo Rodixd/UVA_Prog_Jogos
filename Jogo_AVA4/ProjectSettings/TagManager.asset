@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Collectable
   - Enemy
+  - MusicSlider
   layers:
   - Default
   - TransparentFX
