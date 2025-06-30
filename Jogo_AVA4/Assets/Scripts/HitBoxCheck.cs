@@ -7,7 +7,6 @@ public class HitBoxCheck : MonoBehaviour
 
     private void OnEnable()
     {
-        // Reset at the start of each attack
         hasDealtDamage = false;
     }
 

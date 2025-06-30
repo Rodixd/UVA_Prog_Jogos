@@ -51,7 +51,6 @@ namespace RespawnSystem
             playerGO.SetActive(true);
         }
 
-        // Reset currentRespawnPoint to first spawn (used on full death respawn)
         public void ResetToFirstRespawnPoint()
         {
             currentRespawnPoint.DisableRespawnPoint();

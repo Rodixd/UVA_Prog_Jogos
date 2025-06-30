@@ -13,7 +13,6 @@ public class MovNuvens : MonoBehaviour
         corpo.linearVelocity = new Vector2(-velocidade, 0);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(transform.position.x <= posicao_final)

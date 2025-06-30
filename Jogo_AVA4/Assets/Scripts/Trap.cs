@@ -19,10 +19,8 @@ public class Trap : MonoBehaviour
 
         if (rb)
         {
-            //reset player velocity
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
 
-            //apply bounce force
             rb.AddForce(Vector2.up * bounceForce, ForceMode2D.Impulse);
         }
     }

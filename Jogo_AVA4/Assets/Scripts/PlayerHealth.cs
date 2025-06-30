@@ -48,7 +48,7 @@ public class PlayerHealth : MonoBehaviour
 
             if (currentHealth <= 0)
             {
-                StartCoroutine(DieAndRespawnRoutine(true));  // Full level reset
+                StartCoroutine(DieAndRespawnRoutine(true));
             }
         }
     }
@@ -60,7 +60,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            StartCoroutine(DieAndRespawnRoutine(true));  // Full reset
+            StartCoroutine(DieAndRespawnRoutine(true));
         }
         else
         {

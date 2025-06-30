@@ -12,7 +12,6 @@ public class ControladorFundo : MonoBehaviour
         length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         float distance = (cam.transform.position.x * parallaxEffect);

@@ -42,7 +42,7 @@ namespace RespawnSystem
 
         public void DisableRespawnPoint()
         {
-            GetComponent<Collider2D>().enabled = false; // Disable the collider after activation
+            GetComponent<Collider2D>().enabled = false;
 
         }
 

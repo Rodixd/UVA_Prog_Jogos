@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     public GameObject keyIconUI;
 
     [Header("Attack Hitbox")]
-    public GameObject attackHitboxObject;  // Assign your AttackHitbox GameObject here in inspector
+    public GameObject attackHitboxObject;
     private Vector3 attackHitboxOriginalPos;
 
     void Start()
@@ -75,7 +75,6 @@ public class PlayerController : MonoBehaviour
     {
         float hDirection = Input.GetAxis("Horizontal");
 
-        // Horizontal Movement and Flipping
         if (hDirection > 0)
         {
             rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
@@ -93,7 +92,6 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
         }
 
-        // Jump
         if (Input.GetButtonDown("Jump") && coll.IsTouchingLayers(Ground))
         {
             SoundEffectManager.Play("Jump");
@@ -101,7 +99,6 @@ public class PlayerController : MonoBehaviour
             state = State.jump;
         }
 
-        // Attack input
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SoundEffectManager.Play("Attack");
@@ -207,7 +204,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Call from Animation Event
     public void EnableAttackHitbox()
     {
         if (attackHitboxObject != null)
@@ -216,7 +212,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Call from Animation Event
     public void DisableAttackHitbox()
     {
         if (attackHitboxObject != null)

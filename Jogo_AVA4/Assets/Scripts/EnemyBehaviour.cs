@@ -39,7 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
         else
         {
             Debug.LogWarning("EnemyBehaviour: No SpriteRenderer found in children!");
-            visualChild = transform;  // fallback
+            visualChild = transform;
             originalScale = visualChild.localScale;
         }
         if(triggerArea != null)
@@ -177,9 +177,9 @@ public class EnemyBehaviour : MonoBehaviour
         if (inRange && target != null)
         {
             if (transform.position.x < target.position.x)
-                scale.x = -Mathf.Abs(originalScale.x);  // face left if target is right
+                scale.x = -Mathf.Abs(originalScale.x);
             else
-                scale.x = Mathf.Abs(originalScale.x);   // face right if target is left
+                scale.x = Mathf.Abs(originalScale.x);
         }
         else if (target != null)
         {
